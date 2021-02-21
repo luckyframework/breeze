@@ -1,4 +1,6 @@
 class Breeze::SmallSidebar < BreezeComponent
+  needs context : HTTP::Server::Context
+
   def render
     div class: "md:hidden", x_show: "sidebarOpen" do
       div "@click": "sidebarOpen = false", class: "fixed inset-0 z-30 transition-opacity ease-linear duration-300", "x-transition:enter-end": "opacity-100", "x-transition:enter-start": "opacity-0", "x-transition:leave-end": "opacity-0", "x-transition:leave-start": "opacity-100", x_show: "sidebarOpen" do
@@ -14,7 +16,7 @@ class Breeze::SmallSidebar < BreezeComponent
             end
           end
           div class: "flex-1 h-0 pt-5 pb-4 overflow-y-auto" do
-            mount Breeze::SidebarLinks
+            mount Breeze::SidebarLinks, context: context
           end
         end
       end

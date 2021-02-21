@@ -1,4 +1,5 @@
 require "avram"
+require "./charms/**"
 require "./breeze/models/*"
 require "./breeze/operations/*"
 require "./breeze/queries/*"
