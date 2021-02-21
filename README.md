@@ -45,7 +45,7 @@ When you're ready to check out Breeze, look at your development log. You'll see 
 ▸ Debug at http://localhost:5000/breeze/requests/6
 ```
 
-You can visit a specific request, or just go to `/breeze` to browse.
+You can visit a specific request, or just go to `/breeze/requests` to browse.
 
 ### Extending Breeze
 
