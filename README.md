@@ -13,8 +13,17 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
    ```
 
 2. Run `shards install`
+3. Add the require to your `src/shards.cr`:
 
-3. Add the tasks to your `tasks.cr`:
+   ```crystal
+   require "avram"
+   require "lucky"
+   # ...
+   # Add this line here
+   require "breeze"
+   ```
+
+4. Add the tasks to your `tasks.cr`:
 
   ```crystal
   # ...
@@ -25,9 +34,9 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   LuckyCli::Runner.run
   ```
 
-4. Run `lucky breeze.install`
+5. Run `lucky breeze.install`
 
-5. Include the ActionHelpers in your `src/actions/browser_action.cr`:
+6. Include the ActionHelpers in your `src/actions/browser_action.cr`:
 
   ```crystal
   # ...
@@ -45,7 +54,7 @@ When you're ready to check out Breeze, look at your development log. You'll see 
 ▸ Debug at http://localhost:5000/breeze/requests/6
 ```
 
-You can visit a specific request, or just go to `/breeze` to browse.
+You can visit a specific request, or just go to `/breeze/requests` to browse.
 
 ### Extending Breeze
 

@@ -1,4 +1,5 @@
 require "avram"
+require "lucky"
 require "./charms/**"
 require "./breeze/models/*"
 require "./breeze/operations/*"
