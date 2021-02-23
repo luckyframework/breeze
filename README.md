@@ -2,6 +2,8 @@
 
 Breeze is a development dashboard for [Lucky Framework](https://luckyframework.org/) that helps you to debug and fine-tune your application.
 
+🚧 ** UNDER CONSTRUCTION - Things may change without notice ** 🚧
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
