@@ -7,6 +7,11 @@ abstract class BreezeAction < Lucky::Action
 
   before ensure_breeze_enabled
 
+  macro inherited
+    skip store_breeze_request
+    skip store_breeze_response
+  end
+
   private def ensure_breeze_enabled
     if Breeze.settings.enabled
       continue

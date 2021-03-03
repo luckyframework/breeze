@@ -2,6 +2,8 @@
 
 Breeze is a development dashboard for [Lucky Framework](https://luckyframework.org/) that helps you to debug and fine-tune your application.
 
+🚧 ** UNDER CONSTRUCTION - Things may change without notice ** 🚧
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
@@ -28,22 +30,16 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   ```crystal
   # ...
 
-  # Add this line here
+  # Add these lines here
   require "breeze/tasks/**"
+  require "breeze/db/migrations/**"
 
   LuckyCli::Runner.run
   ```
 
 5. Run `lucky breeze.install`
 
-6. Include the ActionHelpers in your `src/actions/browser_action.cr`:
-
-  ```crystal
-  # ...
-
-  # Add this line
-  include Breeze::ActionHelpers
-  ```
+6. Run `lucky db.migrate`
 
 ## Usage
 
