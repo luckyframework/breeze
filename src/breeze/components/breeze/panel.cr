@@ -1,6 +1,6 @@
 class Breeze::Panel < BreezeComponent
   def render
-    div class: "bg-white border border-gray-200 overflow-hidden sm:rounded-md" do
+    div class: "mb-12 bg-white rounded-lg shadow-lg overflow-hidden" do
       yield
     end
   end

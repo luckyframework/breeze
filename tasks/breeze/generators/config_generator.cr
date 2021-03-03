@@ -14,7 +14,7 @@ class Breeze::ConfigGenerator
   def generate
     ensure_unique!
     File.write(file_path, contents)
-    STDOUT.puts "Created #{name.colorize(:green)} in .#{relative_file_path.colorize(:green)}"
+    STDOUT.puts "Created #{name.colorize(:green)} config in .#{relative_file_path.colorize(:green)}"
   end
 
   private def ensure_unique!
@@ -22,7 +22,11 @@ class Breeze::ConfigGenerator
     d.each_child { |x|
       if x == "#{name}.cr"
         raise <<-ERROR
-          Breeze configuration file already exists in config/#{x}
+          Breeze configuration file already exists in #{"config/#{x}".colorize.red}
+
+          If you're already using this configuration, you can update any changes made:
+
+          #{to_s}
         ERROR
       end
     }

@@ -9,7 +9,6 @@ class Breeze::LayoutHead < BreezeComponent
       title "Breeze - #{@page_title}"
       css_link "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       css_link "https://rsms.me/inter/inter.css"
-      # js_link asset("js/app.js"), defer: "true", data_turbolinks_track: "reload"
       js_link "https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js", defer: "true"
       meta name: "turbolinks-cache-control", content: "no-cache"
       csrf_meta_tags

@@ -7,14 +7,7 @@ class Breeze::Install < LuckyCli::Task
   def call
     print_installation_message
 
-    Breeze::MigrationGenerator.new("CreateBreezeRequests").generate
     Breeze::ConfigGenerator.new.generate
-
-    Process.run "lucky db.migrate",
-      shell: true,
-      input: STDIN,
-      output: STDOUT,
-      error: STDERR
   rescue e : Exception
     STDOUT.puts <<-MESSAGE.colorize(:red)
     Breeze installation failed:
