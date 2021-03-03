@@ -6,4 +6,8 @@ Breeze.configure do |settings|
 
   # Enable Breeze only for this environment
   settings.enabled = Lucky::Env.development?
+
+  # Set this to your Carbon::EmailPreviews class
+  # This should be defined in src/emails/previews.cr
+  # settings.email_previews = Emails::Previews
 end
