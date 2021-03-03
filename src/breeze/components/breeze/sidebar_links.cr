@@ -12,6 +12,7 @@ class Breeze::SidebarLinks < BreezeComponent
   def render
     mount Breeze::SidebarLink(Breeze::Requests::Index), context: context, content: "Requests"
     mount Breeze::SidebarLink(Breeze::Queries::Index), context: context, content: "Queries"
+    mount Breeze::SidebarLink(Breeze::Emails::Index), context: context, content: "Emails"
     # settings.links.each do |link_title, link_action|
     #   mount Breeze::SidebarLink(Breeze::Queries::Index), context: context, content: "Queries"
     # end

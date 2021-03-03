@@ -1,7 +1,7 @@
 require "pulsar"
 require "avram"
 require "lucky"
-require "./charms/*"
+require "./charms/**"
 require "./breeze/models/*"
 require "./breeze/operations/*"
 require "./breeze/queries/*"
@@ -23,5 +23,6 @@ module Breeze
   Habitat.create do
     setting database : Avram::Database.class, example: "AppDatabase"
     setting enabled : Bool, example: "Lucky::Env.development?"
+    setting email_previews : Carbon::EmailPreviews.class, example: "Emails::Previews"
   end
 end

@@ -1,9 +1,8 @@
-abstract class Breeze::Emails::Show < BreezeAction
+class Breeze::Emails::Show < BreezeAction
   param plain : Bool = false
 
   get "/emails/:email_name" do
-    email = load_email_template(email_name)
-
+    email = Breeze.settings.email_previews.find(email_name)
     if plain
       if text_body = email.text_body
         plain_text(text_body, status: 200)
@@ -23,11 +22,9 @@ abstract class Breeze::Emails::Show < BreezeAction
     end
   end
 
-  abstract def load_email_template(email_name : String) : Carbon::Email
-
   private def render_missing_template_error(email : Carbon::Email, template : String)
     plain_text(<<-MESSAGE, status: 400)
-    The email template #{email.class} does not have
+    The email #{email.class} does not have
     a #{template} template email setup.
 
     Try this...
