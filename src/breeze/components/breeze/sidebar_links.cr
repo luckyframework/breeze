@@ -4,10 +4,10 @@ class Breeze::SidebarLinks < BreezeComponent
   Habitat.create do
     setting links : Array(Proc(Breeze::SidebarLinks, Nil)) = [
       ->(breeze : Breeze::SidebarLinks) {
-        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Requests", link_to: Breeze::Requests::Index)
+        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Requests", link_to: Breeze::Requests::Index.path)
       },
       ->(breeze : Breeze::SidebarLinks) {
-        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Queries", link_to: Breeze::Queries::Index)
+        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Queries", link_to: Breeze::Queries::Index.path)
       },
     ]
   end
