@@ -1,9 +1,10 @@
-class Breeze::SidebarLink(T) < BreezeComponent
+class Breeze::SidebarLink < BreezeComponent
   needs context : HTTP::Server::Context
-  needs content : String
+  needs link_text : String
+  needs link_to : Lucky::Action.class | Lucky::RouteHelper
 
   def render
-    link content, to: T, class: link_class(T)
+    a link_text, href: "" # link_to.path, class: link_class(link_to)
   end
 
   def link_class(action)

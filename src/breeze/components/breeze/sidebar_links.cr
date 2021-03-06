@@ -1,21 +1,21 @@
 class Breeze::SidebarLinks < BreezeComponent
   needs context : HTTP::Server::Context
 
-  # NOTE: https://github.com/luckyframework/lucky/issues/1243
-  # Habitat.create do
-  #   setting links : Hash(String, BreezeAction.class) = {
-  #     "Requests" => Breeze::Requests::Index,
-  #     "Queries"  => Breeze::Queries::Index,
-  #   }
-  # end
+  Habitat.create do
+    setting links : Array(Proc(Breeze::SidebarLinks, Nil)) = [
+      ->(breeze : Breeze::SidebarLinks) {
+        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Requests", link_to: Breeze::Requests::Index)
+      },
+      ->(breeze : Breeze::SidebarLinks) {
+        breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Queries", link_to: Breeze::Queries::Index)
+      },
+    ]
+  end
 
   def render
-    mount Breeze::SidebarLink(Breeze::Requests::Index), context: context, content: "Requests"
-    mount Breeze::SidebarLink(Breeze::Queries::Index), context: context, content: "Queries"
-    mount Breeze::SidebarLink(Breeze::Emails::Index), context: context, content: "Emails"
-    # settings.links.each do |link_title, link_action|
-    #   mount Breeze::SidebarLink(Breeze::Queries::Index), context: context, content: "Queries"
-    # end
+    settings.links.each do |component|
+      component.call(self)
+    end
   end
 
   private def sidebar_link_css : String

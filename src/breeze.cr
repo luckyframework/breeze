@@ -23,6 +23,5 @@ module Breeze
   Habitat.create do
     setting database : Avram::Database.class, example: "AppDatabase"
     setting enabled : Bool, example: "Lucky::Env.development?"
-    setting email_previews : Carbon::EmailPreviews.class, example: "Emails::Previews"
   end
 end

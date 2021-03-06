@@ -1,9 +1,9 @@
-class Breeze::Emails::Show < BreezeAction
-  param plain : Bool = false
+class Breeze::Emails::Render < BreezeAction
+  param plain_format : Bool = false
 
-  get "/emails/:email_name" do
+  get "/emails/:email_name/render" do
     email = Breeze.settings.email_previews.find(email_name)
-    if plain
+    if plain_format
       if text_body = email.text_body
         plain_text(text_body, status: 200)
       else
@@ -28,7 +28,7 @@ class Breeze::Emails::Show < BreezeAction
     a #{template} template email setup.
 
     Try this...
-      1. In your #{email.class}, add `#{template}` to your `templates` - templates html, text
+      1. In your #{email.class}, add `#{template}` to your `templates` (e.g. templates html, text)
       2. Add a `#{template}.ecr` file in src/emails/templates/#{email.class.name.underscore}/#{template}.ecr
     MESSAGE
   end
