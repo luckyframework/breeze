@@ -3,6 +3,7 @@ class BreezeSqlStatement < BreezeBaseModel
     column statement : String
     column args : String?
     column model : String?
+    column elapsed_text : String
     belongs_to breeze_request : BreezeRequest?
   end
 end
