@@ -2,7 +2,8 @@ class Breeze::Emails::Show < BreezeAction
   param plain_format : Bool = false
 
   get "/emails/:email_key" do
-    email = Breeze.settings.email_previews.find(email_key)
-    html ShowPage, email: email, email_key: email_key, plain_format: plain_format
+    key = URI.decode_www_form(email_key)
+    email = Breeze.settings.email_previews.find(key)
+    html ShowPage, email: email, email_key: key, plain_format: plain_format
   end
 end

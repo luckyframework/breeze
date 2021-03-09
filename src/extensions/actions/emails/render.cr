@@ -1,8 +1,9 @@
 class Breeze::Emails::Render < BreezeAction
   param plain_format : Bool = false
 
-  get "/emails/:email_name/render" do
-    email = Breeze.settings.email_previews.find(email_name)
+  get "/emails/:email_key/render" do
+    key = URI.decode_www_form(email_key)
+    email = Breeze.settings.email_previews.find(key)
     if plain_format
       if text_body = email.text_body
         plain_text(text_body, status: 200)

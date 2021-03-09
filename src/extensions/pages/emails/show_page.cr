@@ -9,25 +9,23 @@ class Breeze::Emails::ShowPage < BreezeLayout
 
   def content
     mount Breeze::Panel do
-      ul class: "mt-1 divide-y divide-gray-200" do
-        email_data_row("Subject", email.subject)
-        email_data_row("From", email.from.address)
-        email_data_row("To", email.to.join(", ", &.address))
-        email.headers.each do |key, value|
-          email_data_row(key, value)
-        end
+      mount Breeze::DescriptionList,
+        heading_title: ->{ text "Email Previews" },
+        list: ->{
+          mount Breeze::DescriptionListRow, "Subject", email.subject
+          mount Breeze::DescriptionListRow, "From", email.from.address
+          mount Breeze::DescriptionListRow, "To", email.to.join(", ", &.address)
+          email.headers.each do |key, value|
+            mount Breeze::DescriptionListRow, key, value
+          end
+        }
+    end
+    mount Breeze::Panel do
+      div class: "px-4 py-5 border-b border-gray-200 sm:px-6" do
+        h3 "Email Body", class: "text-lg leading-6 font-medium text-gray-900"
       end
-    end
-    div class: "bg-white my-4" do
-      iframe src: Breeze::Emails::Render.with(email_key, plain_format: plain_format?).path, class: "w-full h-screen"
-    end
-  end
 
-  private def email_data_row(title : String, value : String)
-    li class: "p-2" do
-      span "#{title}:"
-      nbsp
-      span value
+      iframe src: Breeze::Emails::Render.with(email_key, plain_format: plain_format?).path, class: "w-full h-screen"
     end
   end
 end
