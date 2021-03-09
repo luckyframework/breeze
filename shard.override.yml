@@ -1,5 +1,0 @@
-# Needed until the next release
-dependencies:
-  habitat:
-    github: luckyframework/habitat
-    branch: master
