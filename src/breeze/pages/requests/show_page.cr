@@ -47,7 +47,7 @@ class Breeze::Requests::ShowPage < BreezeLayout
           list: ->{
             if req.breeze_sql_statements.any?
               req.breeze_sql_statements.each do |query|
-                mount Breeze::DescriptionListRow, "#{query.model}Query", query.statement
+                render_query_row(query)
               end
             else
               para "No queries", class: "text-center text-gray-500 px-10 py-8 max-x-sm"
@@ -99,6 +99,26 @@ class Breeze::Requests::ShowPage < BreezeLayout
     req.breeze_response.try do |resp|
       resp.headers.as_h.each do |key, value|
         mount Breeze::DescriptionListRow, "Header #{key}", value[0].as_s
+      end
+    end
+  end
+
+  def render_query_row(query : BreezeSqlStatement)
+    link_styles = "block sm:border-t sm:border-gray-200 hover:bg-indigo-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
+
+    link to: Queries::Show.with(query.id), class: link_styles do
+      div class: "flex items-center px-4 py-4 sm:px-4" do
+        div class: "min-w-0 flex-1 flex items-center" do
+          div class: "min-w-0 flex-1 px-4 sm:grid grid-cols-3 md:grid-cols-3 gap-4" do
+            div class: "text-sm leading-5 font-medium text-gray-500" { text "#{query.model}Query" }
+            div class: "text-sm leading-5 text-gray-500 col-span-2 mt-2 sm:mt-0" do
+              text query.statement
+            end
+          end
+        end
+        div do
+          mount RowArrow
+        end
       end
     end
   end
