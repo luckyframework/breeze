@@ -4,7 +4,7 @@ module Breeze::ActionHelpers
     after store_breeze_response
 
     Avram::Events::QueryEvent.subscribe do |event, duration|
-      if Breeze.settings.enabled
+      next unless Breeze.settings.enabled
         # TODO: move this to a config setting
         next if event.query.includes?("breeze_") || event.query.includes?("information_schema")
 
