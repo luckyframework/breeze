@@ -5,19 +5,18 @@ module Breeze::ActionHelpers
 
     Avram::Events::QueryEvent.subscribe do |event, duration|
       next unless Breeze.settings.enabled
-        # TODO: move this to a config setting
-        next if event.query.includes?("breeze_") || event.query.includes?("information_schema")
+      # TODO: move this to a config setting
+      next if event.query.includes?("breeze_") || event.query.includes?("information_schema")
 
-        req = Fiber.current.breeze_request
-        spawn do
-          SaveBreezeSqlStatement.create!(
-            breeze_request_id: req.try(&.id),
-            statement: event.query,
-            args: event.args,
-            model: event.queryable,
-            elapsed_text: duration.to_elapsed_text
-          )
-        end
+      req = Fiber.current.breeze_request
+      spawn do
+        SaveBreezeSqlStatement.create!(
+          breeze_request_id: req.try(&.id),
+          statement: event.query,
+          args: event.args,
+          model: event.queryable,
+          elapsed_text: duration.to_elapsed_text
+        )
       end
     end
   end
