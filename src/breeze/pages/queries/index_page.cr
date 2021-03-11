@@ -18,7 +18,7 @@ class Breeze::Queries::IndexPage < BreezeLayout
         end
       end
 
-      mount Breeze::PageNav, pages
+      mount Breeze::Pagination, pages
     end
   end
 

@@ -1,4 +1,4 @@
-class Breeze::PageNav < BreezeComponent
+class Breeze::Pagination < BreezeComponent
   needs pages : Lucky::Paginator
 
   def render
@@ -77,7 +77,7 @@ class Breeze::PageNav < BreezeComponent
   def next_and_previous_links_for_small_screens
     div class: "flex-1 flex justify-between sm:hidden" do
       a "Previous",
-        href: @pages.path_to_previous || "#",
+        href: pages.path_to_previous || "#",
         class: <<-TEXT.lines.join(" ")
           relative inline-flex items-center px-4 py-2 border border-gray-300
           text-sm leading-5 font-medium rounded-md text-gray-700 bg-white
@@ -86,7 +86,7 @@ class Breeze::PageNav < BreezeComponent
           transition ease-in-out duration-150
           TEXT
       a "Next",
-        href: @pages.path_to_next || "#",
+        href: pages.path_to_next || "#",
         class: <<-TEXT.lines.join(" ")
           ml-3 relative inline-flex items-center px-4 py-2 border
           border-gray-300 text-sm leading-5 font-medium rounded-md

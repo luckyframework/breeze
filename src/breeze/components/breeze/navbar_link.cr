@@ -1,4 +1,4 @@
-class Breeze::SidebarLink(T) < BreezeComponent
+class Breeze::NavbarLink(T) < BreezeComponent
   needs context : HTTP::Server::Context
   needs content : String
 
