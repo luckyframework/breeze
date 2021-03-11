@@ -6,4 +6,10 @@ Breeze.configure do |settings|
 
   # Enable Breeze only for this environment
   settings.enabled = Lucky::Env.development?
+
+  # Add this setting in if you want to skip the breeze pipes
+  # for specific calls.
+  # settings.skip_breeze_if = ->(context : HTTP::Server::Context) {
+  #   context.request.resource.starts_with?("/admin")
+  # }
 end

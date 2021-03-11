@@ -23,5 +23,6 @@ module Breeze
   Habitat.create do
     setting database : Avram::Database.class, example: "AppDatabase"
     setting enabled : Bool, example: "Lucky::Env.development?"
+    setting skip_breeze_if : Proc(HTTP::Server::Context, Bool)?
   end
 end

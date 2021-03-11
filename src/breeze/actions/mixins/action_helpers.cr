@@ -22,7 +22,7 @@ module Breeze::ActionHelpers
   end
 
   private def store_breeze_request
-    if Breeze.settings.enabled
+    if allow_breeze(context)
       req = SaveBreezeRequest.create!(
         path: request.resource,
         method: request.method,
@@ -40,7 +40,7 @@ module Breeze::ActionHelpers
   end
 
   private def store_breeze_response
-    if Breeze.settings.enabled
+    if allow_breeze(context)
       req = Fiber.current.breeze_request.not_nil!
       # TODO: can we run this in a spawn?
       SaveBreezeResponse.create!(
@@ -52,5 +52,10 @@ module Breeze::ActionHelpers
     end
 
     continue
+  end
+
+  private def allow_breeze(context : HTTP::Server::Context)
+    should_skip = Breeze.settings.skip_breeze_if.try(&.call(context))
+    Breeze.settings.enabled && !should_skip
   end
 end
