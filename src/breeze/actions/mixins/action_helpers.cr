@@ -1,4 +1,8 @@
 module Breeze::ActionHelpers
+  Habitat.create do
+    setting skip_pipes_if : Proc(HTTP::Server::Context, Bool)?
+  end
+
   macro included
     before store_breeze_request
     after store_breeze_response
@@ -55,7 +59,7 @@ module Breeze::ActionHelpers
   end
 
   private def allow_breeze(context : HTTP::Server::Context)
-    should_skip = Breeze.settings.skip_breeze_if.try(&.call(context))
+    should_skip = settings.skip_pipes_if.try(&.call(context))
     Breeze.settings.enabled && !should_skip
   end
 end
