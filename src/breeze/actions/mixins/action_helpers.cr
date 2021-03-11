@@ -42,13 +42,14 @@ module Breeze::ActionHelpers
   private def store_breeze_response
     if Breeze.settings.enabled
       req = Fiber.current.breeze_request.not_nil!
-      # TODO: can we run this in a spawn?
-      SaveBreezeResponse.create!(
-        breeze_request_id: req.id,
-        status: response.status_code,
-        session: JSON.parse(session.to_json),
-        headers: JSON.parse(response.headers.to_h.to_json)
-      )
+      spawn do
+        SaveBreezeResponse.create!(
+          breeze_request_id: req.id,
+          status: response.status_code,
+          session: JSON.parse(session.to_json),
+          headers: JSON.parse(response.headers.to_h.to_json)
+        )
+      end
     end
 
     continue
