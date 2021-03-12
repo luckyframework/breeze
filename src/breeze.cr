@@ -4,6 +4,7 @@ require "lucky"
 require "./charms/*"
 require "./breeze/models/*"
 require "./breeze/operations/*"
+require "./breeze/queries/mixins/*"
 require "./breeze/queries/*"
 require "./breeze/actions/mixins/*"
 
