@@ -31,8 +31,7 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   # ...
 
   # Add these lines here
-  require "breeze/tasks/**"
-  require "breeze/db/migrations/**"
+  require "breeze/tasks"
 
   LuckyCli::Runner.run
   ```
@@ -52,9 +51,73 @@ When you're ready to check out Breeze, look at your development log. You'll see 
 
 You can visit a specific request, or just go to `/breeze/requests` to browse.
 
-### Extending Breeze
+## Configuration
 
-coming soon.... (ish)
+You breeze configuration will be located in `config/breeze.cr`. This file was added for you when you ran `lucky breeze.install`.
+
+```crystal
+# config/breeze.cr
+
+Breeze.configure do |settings|
+  # The database to store the request info
+  settings.database = AppDatabase
+
+  # Enable Breeze only for this environment
+  settings.enabled = Lucky::Env.development?
+end
+
+# Configuration settings for Actions
+Breeze::ActionHelpers.configure do |settings|
+  settings.skip_pipes_if = ->(context : HTTP::Server::Context) {
+    context.request.resource.starts_with?("/admin")
+  }
+end
+```
+
+* `database` - This is the `Avram::Database` your models inherit from. By default, it's `AppDatabase`.
+* `enabled` - When set to `false`, you won't be able to visit any of the breeze pages. This is enabled for development by default.
+* `skip_pipes_if` - Breeze will store the request and response for every action in your app. If there's some actions you don't want to store, you can skip these by matching the request path or resource. You could also skip certain content types, or whatever else you want.
+
+## Breeze Extensions
+
+Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension that allows you to preview your emails right in the browser.
+
+### Installing
+
+1. Add the require to your `src/shards.cr` right below your `require "breeze"`:
+
+    ```crystal
+   require "breeze"
+   require "breeze/extensions/carbon"
+   ```
+
+2. Add your Email preview class to `src/emails/previews.cr`:
+
+   ```crystal
+   class Emails::Previews < Carbon::EmailPreviews
+     def previews : Hash(String, Carbon::Email)
+       {
+         "welcome_email"  => WelcomeEmail.new(UserQuery.first),
+         "password_reset" => PasswordResetRequestEmail.new(UserQuery.first),
+       } of String => Carbon::Email
+     end
+   end
+   ```
+
+3. Update your Breeze config in `config/breeze.cr`:
+
+   ```crystal
+   Breeze.configure do |settings|
+     # ... other settings
+     
+     # Set this to the name of your preview class
+     settings.email_previews = Emails::Previews
+   end
+   ```
+
+## Extending Breeze
+
+coming soon....
 
 
 ## Development
