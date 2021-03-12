@@ -1,14 +1,15 @@
-class Breeze::NavbarLink(T) < BreezeComponent
+class Breeze::NavbarLink < BreezeComponent
   needs context : HTTP::Server::Context
-  needs content : String
+  needs link_text : String
+  needs link_to : String
 
   def render
-    link content, to: T, class: link_class(T)
+    a link_text, href: link_to, class: link_styles
   end
 
-  def link_class(action)
+  def link_styles
     extra_classes =
-      if current_page?(action.path)
+      if current_page?(context.request.path)
         link_active_class
       else
         link_inactive_class
