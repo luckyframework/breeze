@@ -10,6 +10,6 @@ module Breeze
   end
 end
 
-Breeze::SidebarLinks.settings.links << ->(breeze : Breeze::SidebarLinks) {
-  breeze.mount(Breeze::SidebarLink, context: breeze.context, link_text: "Emails", link_to: Breeze::Emails::Index.path)
+Breeze::NavbarLinks.settings.links << ->(navbar : Breeze::NavbarLinks) {
+  navbar.mount_link(link_text: "Emails", link_to: Breeze::Emails::Index.path)
 }
