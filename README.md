@@ -30,7 +30,7 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   ```crystal
   # ...
 
-  # Add these lines here
+  # Add this line here
   require "breeze/tasks"
 
   LuckyCli::Runner.run
@@ -68,6 +68,7 @@ end
 
 # Configuration settings for Actions
 Breeze::ActionHelpers.configure do |settings|
+  # This setting is optional
   settings.skip_pipes_if = ->(context : HTTP::Server::Context) {
     context.request.resource.starts_with?("/admin")
   }
@@ -114,6 +115,16 @@ Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension
      settings.email_previews = Emails::Previews
    end
    ```
+   
+### Usage
+
+Just visit `/breeze/emails` in your browser, and you'll see your emails. Click the `HTML` button to see the HTML version of your email, or the `TEXT` to see the plain text version.
+
+### Configuration
+
+By enabling this extension, Breeze will require a new setting `email_previews` which is the class that will contain your preview setup. This is so Breeze knows what you named the class.
+
+Your email preview class should inherit from `Carbon::EmailPreviews`, and define an instance method `previews` which returns a `Hash(String, Carbon::Email)`. The `String` key is a key that will be passed through the URL to locate which email Breeze will display. The value will be an instance of the `Carbon::Email` to be rendered. Since each email requires different arguments in order to be instantiated, it's up to you to define how those values are set.
 
 ## Extending Breeze
 
