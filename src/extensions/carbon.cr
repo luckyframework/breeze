@@ -11,5 +11,5 @@ module Breeze
 end
 
 Breeze::NavbarLinks.settings.links << ->(navbar : Breeze::NavbarLinks) {
-  navbar.mount_link(link_text: "Emails", link_to: Breeze::Emails::Index.path)
+  navbar.mount_link("Emails", to: Breeze::Emails::Index)
 }
