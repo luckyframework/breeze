@@ -1,4 +1,8 @@
 module Breeze::ActionHelpers
+  Habitat.create do
+    setting skip_pipes_if : Proc(HTTP::Server::Context, Bool)?
+  end
+
   macro included
     before store_breeze_request
     after store_breeze_response
@@ -22,7 +26,7 @@ module Breeze::ActionHelpers
   end
 
   private def store_breeze_request
-    if Breeze.settings.enabled
+    if allow_breeze(context)
       req = SaveBreezeRequest.create!(
         path: request.resource,
         method: request.method,
@@ -40,7 +44,7 @@ module Breeze::ActionHelpers
   end
 
   private def store_breeze_response
-    if Breeze.settings.enabled
+    if allow_breeze(context)
       req = Fiber.current.breeze_request.not_nil!
       spawn do
         SaveBreezeResponse.create!(
@@ -53,5 +57,10 @@ module Breeze::ActionHelpers
     end
 
     continue
+  end
+
+  private def allow_breeze(context : HTTP::Server::Context)
+    should_skip = settings.skip_pipes_if.try(&.call(context))
+    Breeze.settings.enabled && !should_skip
   end
 end
