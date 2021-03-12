@@ -6,7 +6,7 @@ class Breeze::LayoutHead < BreezeComponent
   def render
     head do
       utf8_charset
-      title "Breeze - #{@page_title}"
+      title "Breeze - #{page_title}"
       css_link "https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       css_link "https://rsms.me/inter/inter.css"
       js_link "https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js", defer: "true"
