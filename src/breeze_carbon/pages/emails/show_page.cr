@@ -1,4 +1,4 @@
-class Breeze::Emails::ShowPage < BreezeLayout
+class BreezeCarbon::Emails::ShowPage < BreezeLayout
   needs email : Carbon::Email
   needs email_key : String
   needs plain_format : Bool
@@ -25,7 +25,7 @@ class Breeze::Emails::ShowPage < BreezeLayout
         h3 "Email Body", class: "text-lg leading-6 font-medium text-gray-900"
       end
 
-      iframe src: Breeze::Emails::Render.with(email_key, plain_format: plain_format?).path, class: "w-full h-screen"
+      iframe src: Emails::Render.with(email_key, plain_format: plain_format?).path, class: "w-full h-screen"
     end
   end
 end
