@@ -1,4 +1,4 @@
-class Breeze::NavbarLinks < BreezeComponent
+class Breeze::NavbarLinks < Breeze::BreezeComponent
   needs context : HTTP::Server::Context
 
   Habitat.create do

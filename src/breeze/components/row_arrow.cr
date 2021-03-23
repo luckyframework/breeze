@@ -1,4 +1,4 @@
-class RowArrow < BreezeComponent
+class Breeze::RowArrow < Breeze::BreezeComponent
   needs html_class : String = "h-5 w-5 text-gray-400"
 
   def render

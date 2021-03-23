@@ -1,2 +1,2 @@
-class SaveBreezeResponse < BreezeResponse::SaveOperation
+class Breeze::SaveBreezeResponse < Breeze::BreezeResponse::SaveOperation
 end

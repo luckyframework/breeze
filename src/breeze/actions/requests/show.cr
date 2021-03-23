@@ -1,4 +1,4 @@
-class Breeze::Requests::Show < BreezeAction
+class Breeze::Requests::Show < Breeze::BreezeAction
   get "/requests/:request_id" do
     breeze_request = BreezeRequestQuery.new
       .preload_breeze_response

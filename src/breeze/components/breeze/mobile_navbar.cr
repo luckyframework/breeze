@@ -1,4 +1,4 @@
-class Breeze::MobileNavbar < BreezeComponent
+class Breeze::MobileNavbar < Breeze::BreezeComponent
   needs context : HTTP::Server::Context
 
   def render

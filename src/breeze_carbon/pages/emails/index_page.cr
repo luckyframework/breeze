@@ -1,4 +1,4 @@
-class BreezeCarbon::Emails::IndexPage < BreezeLayout
+class BreezeCarbon::Emails::IndexPage < Breeze::BreezeLayout
   needs emails : Carbon::EmailPreviews::EmailLookup
 
   def page_title : String

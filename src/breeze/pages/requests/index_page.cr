@@ -1,4 +1,4 @@
-class Breeze::Requests::IndexPage < BreezeLayout
+class Breeze::Requests::IndexPage < Breeze::BreezeLayout
   needs pages : Lucky::Paginator
   needs breeze_requests : BreezeRequestQuery
 

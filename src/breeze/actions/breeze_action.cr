@@ -1,4 +1,4 @@
-abstract class BreezeAction < Lucky::Action
+abstract class Breeze::BreezeAction < Lucky::Action
   include Lucky::ProtectFromForgery
   include Lucky::Paginator::BackendHelpers
   accepted_formats [:html, :json], default: :html

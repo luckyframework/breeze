@@ -1,4 +1,4 @@
-class Breeze::FlashMessages < BreezeComponent
+class Breeze::FlashMessages < Breeze::BreezeComponent
   needs flash : Lucky::FlashStore
 
   def render

@@ -1,4 +1,4 @@
-class Breeze::Badge < BreezeComponent
+class Breeze::Badge < Breeze::BreezeComponent
   needs req : BreezeRequest
   needs large : Bool = false
 

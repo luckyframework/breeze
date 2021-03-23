@@ -1,5 +1,5 @@
-class BreezeRequest < BreezeBaseModel
-  table do
+class Breeze::BreezeRequest < Breeze::BreezeBaseModel
+  table :breeze_requests do
     column path : String
     column method : String
     column action : String
