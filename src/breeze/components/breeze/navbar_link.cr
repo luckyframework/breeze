@@ -9,7 +9,7 @@ class Breeze::NavbarLink < Breeze::BreezeComponent
 
   def link_styles
     extra_classes =
-      if current_page?(context.request.path)
+      if current_page?(link_to)
         link_active_class
       else
         link_inactive_class
