@@ -5,9 +5,7 @@ class Breeze::NavbarLinks < Breeze::BreezeComponent
     mount_link("Requests", to: Breeze::Requests::Index)
     mount_link("Queries", to: Breeze::Queries::Index)
     Breeze.extensions.each do |extension|
-      extension.navbar_link(context)
-        .view(view)
-        .render
+      mount extension.navbar_link(context)
     end
   end
 
