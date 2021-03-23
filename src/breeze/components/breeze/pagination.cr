@@ -1,4 +1,4 @@
-class Breeze::Pagination < BreezeComponent
+class Breeze::Pagination < Breeze::BreezeComponent
   needs pages : Lucky::Paginator
 
   def render

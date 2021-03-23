@@ -1,4 +1,4 @@
-class BreezeCarbon::Emails::Show < BreezeAction
+class BreezeCarbon::Emails::Show < Breeze::BreezeAction
   param plain_format : Bool = false
 
   get "/emails/:email_key" do

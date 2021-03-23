@@ -1,2 +1,2 @@
-class SaveBreezeSqlStatement < BreezeSqlStatement::SaveOperation
+class Breeze::SaveBreezeSqlStatement < Breeze::BreezeSqlStatement::SaveOperation
 end

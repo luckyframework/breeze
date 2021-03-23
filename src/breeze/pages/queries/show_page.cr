@@ -1,4 +1,4 @@
-class Breeze::Queries::ShowPage < BreezeLayout
+class Breeze::Queries::ShowPage < Breeze::BreezeLayout
   needs breeze_sql_statement : BreezeSqlStatement
 
   def page_title : String

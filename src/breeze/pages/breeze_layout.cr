@@ -1,4 +1,4 @@
-abstract class BreezeLayout
+abstract class Breeze::BreezeLayout
   include Lucky::HTMLPage
 
   abstract def content

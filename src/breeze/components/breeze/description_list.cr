@@ -1,5 +1,5 @@
 # https://tailwindui.com/components/application-ui/data-display/description-lists#component-e1b5917b21bbe76a73a96c5ca876225f
-class Breeze::DescriptionList < BreezeComponent
+class Breeze::DescriptionList < Breeze::BreezeComponent
   needs heading_title : HtmlProc
   needs list : HtmlProc
 

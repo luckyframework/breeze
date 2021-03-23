@@ -1,4 +1,4 @@
-class BreezeCarbon::Emails::Render < BreezeAction
+class BreezeCarbon::Emails::Render < Breeze::BreezeAction
   param plain_format : Bool = false
 
   get "/emails/:email_key/render" do

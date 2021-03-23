@@ -1,4 +1,4 @@
-class Breeze::Requests::ShowPage < BreezeLayout
+class Breeze::Requests::ShowPage < Breeze::BreezeLayout
   needs breeze_request : BreezeRequest
 
   def page_title : String

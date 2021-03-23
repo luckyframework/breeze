@@ -14,7 +14,7 @@ module Breeze::ActionHelpers
 
       req = Fiber.current.breeze_request
       spawn do
-        SaveBreezeSqlStatement.create!(
+        Breeze::SaveBreezeSqlStatement.create!(
           breeze_request_id: req.try(&.id),
           statement: event.query,
           args: event.args,
@@ -27,7 +27,7 @@ module Breeze::ActionHelpers
 
   private def store_breeze_request
     if allow_breeze(context)
-      req = SaveBreezeRequest.create!(
+      req = Breeze::SaveBreezeRequest.create!(
         path: request.resource,
         method: request.method,
         action: self.class.name,
@@ -47,7 +47,7 @@ module Breeze::ActionHelpers
     if allow_breeze(context)
       req = Fiber.current.breeze_request.not_nil!
       spawn do
-        SaveBreezeResponse.create!(
+        Breeze::SaveBreezeResponse.create!(
           breeze_request_id: req.id,
           status: response.status_code,
           session: JSON.parse(session.to_json),

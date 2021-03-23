@@ -1,4 +1,4 @@
-class Breeze::DescriptionListRow < BreezeComponent
+class Breeze::DescriptionListRow < Breeze::BreezeComponent
   needs key : String
   needs value : String
 

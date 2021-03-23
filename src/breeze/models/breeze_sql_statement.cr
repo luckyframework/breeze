@@ -1,5 +1,5 @@
-class BreezeSqlStatement < BreezeBaseModel
-  table do
+class Breeze::BreezeSqlStatement < Breeze::BreezeBaseModel
+  table :breeze_sql_statements do
     column statement : String
     column args : String?
     column model : String?

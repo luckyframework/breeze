@@ -1,4 +1,4 @@
-class BreezeCarbon::Emails::ShowPage < BreezeLayout
+class BreezeCarbon::Emails::ShowPage < Breeze::BreezeLayout
   needs email : Carbon::Email
   needs email_key : String
   needs plain_format : Bool
