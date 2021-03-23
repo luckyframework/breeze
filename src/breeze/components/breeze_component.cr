@@ -17,11 +17,7 @@ abstract class Breeze::BreezeComponent < Lucky::BaseComponent
   end
 
   private def print_component_comment(component : Lucky::BaseComponent) : Nil
-    if Lucky::HTMLPage.settings.render_component_comments
-      raw "<!-- BEGIN: #{component.class.name} #{component.class.file_location} -->"
-      yield
-      raw "<!-- END: #{component.class.name} -->"
-    else
+    print_component_comment(component.class) do
       yield
     end
   end
