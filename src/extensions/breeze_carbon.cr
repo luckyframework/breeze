@@ -11,11 +11,11 @@ module BreezeCarbon
     setting email_previews : Carbon::EmailPreviews.class, example: "Emails::Previews"
   end
 
-  def self.name : String
-    "Emails"
-  end
-
-  def self.entrypoint : Lucky::Action.class
-    BreezeCarbon::Emails::Index
+  def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+    Breeze::NavbarLink.new(
+      context: context,
+      link_text: "Emails",
+      link_to: BreezeCarbon::Emails::Index.path
+    )
   end
 end

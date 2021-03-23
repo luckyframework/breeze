@@ -5,12 +5,8 @@
 # module BreezeCustom
 #   extend Breeze::Extension
 #
-#   def self.name : String
-#     "Custom"
-#   end
-#
-#   def self.entrypoint : Lucky::Action.class
-#     BreezeCustom::Index
+#   def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+#     Breeze::NavbarLink.new(context: context, link_text: "Custom", link_to: BreezeCustom::Index.path)
 #   end
 # end
 # ```
@@ -22,11 +18,5 @@
 # ```
 #
 module Breeze::Extension
-  # The name of the extension
-  # Will be used as the text in the link found in the navbar
-  abstract def name : String
-
-  # The entrypoint of the extension
-  # Will be used as the href of the navbar link
-  abstract def entrypoint : Lucky::Action.class
+  abstract def navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
 end
