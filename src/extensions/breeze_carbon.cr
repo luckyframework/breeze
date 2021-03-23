@@ -5,11 +5,17 @@ require "../breeze_carbon/actions/**"
 require "../breeze_carbon/pages/**"
 
 module BreezeCarbon
+  extend Breeze::Extension
+
   Habitat.create do
     setting email_previews : Carbon::EmailPreviews.class, example: "Emails::Previews"
   end
-end
 
-Breeze::NavbarLinks.settings.links << ->(navbar : Breeze::NavbarLinks) {
-  navbar.mount_link("Emails", to: BreezeCarbon::Emails::Index)
-}
+  def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+    Breeze::NavbarLink.new(
+      context: context,
+      link_text: "Emails",
+      link_to: BreezeCarbon::Emails::Index.path
+    )
+  end
+end

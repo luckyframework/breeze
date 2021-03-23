@@ -2,6 +2,7 @@ require "pulsar"
 require "avram"
 require "lucky"
 require "./charms/*"
+require "./breeze/extension"
 require "./breeze/models/*"
 require "./breeze/operations/*"
 require "./breeze/queries/mixins/*"
@@ -20,9 +21,14 @@ require "./breeze/pages/**"
 
 module Breeze
   VERSION = "0.1.0"
+  class_getter extensions = [] of Breeze::Extension
 
   Habitat.create do
     setting database : Avram::Database.class, example: "AppDatabase"
     setting enabled : Bool, example: "Lucky::Env.development?"
+  end
+
+  def self.register(extension : Breeze::Extension)
+    extensions << extension
   end
 end
