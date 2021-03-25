@@ -1,6 +1,5 @@
 abstract class Breeze::BreezeComponent < Lucky::BaseComponent
   include Lucky::UrlHelpers
-  alias HtmlProc = Proc(IO::Memory) | Proc(Nil)
 
   def mount(component : Lucky::BaseComponent, *args, **named_args) : Nil
     print_component_comment(component) do
