@@ -11,18 +11,18 @@ license: MIT
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 0.26.0
+    version: ">= 0.26.0"
   avram:
     github: luckyframework/avram
-    version: ~> 0.19.0
+    version: ">= 0.19.0"
   pulsar:
     github: luckyframework/pulsar
-    version: ~> 0.2.0
+    version: ">= 0.2.0"
+  lucky_task:
+    github: luckyframework/lucky_task
+    version: ">= 0.1.0"
 
 development_dependencies:
-  lucky_cli:
-    github: luckyframework/lucky_cli
-    version: ~> 0.26.0
   ameba:
     github: crystal-ameba/ameba
-    version: ~> 0.13.4
+    version: "~> 0.14.2"

@@ -1,7 +1,7 @@
 require "colorize"
 require "./generators/*"
 
-class Breeze::Install < LuckyCli::Task
+class Breeze::Install < LuckyTask::Task
   summary "Installs the required files for running Breeze"
 
   def call
