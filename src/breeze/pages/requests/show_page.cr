@@ -44,7 +44,7 @@ class Breeze::Requests::ShowPage < Breeze::BreezeLayout
       mount Breeze::DescriptionList,
         heading_title: ->{ text "Queries" },
         list: ->{
-          if req.breeze_sql_statements.any?
+          if !req.breeze_sql_statements.empty?
             req.breeze_sql_statements.each do |query|
               render_query_row(query)
             end

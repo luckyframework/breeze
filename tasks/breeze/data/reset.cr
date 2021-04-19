@@ -1,6 +1,6 @@
 require "colorize"
 
-class Breeze::Data::Reset < LuckyCli::Task
+class Breeze::Data::Reset < LuckyTask::Task
   summary "Deletes all of the Breeze data"
 
   def call

@@ -6,6 +6,8 @@
 # LuckyCli::Runner.run
 # ```
 
+require "lucky_task"
+
 # Require all of the built-in Breeze tasks
 require "./tasks/**"
 
