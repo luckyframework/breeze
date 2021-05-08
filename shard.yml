@@ -8,6 +8,10 @@ crystal: ">= 0.36.1"
 
 license: MIT
 
+targets:
+  lucky.breeze.install:
+    main: src/precompiled_tasks/breeze_install.cr
+
 dependencies:
   lucky:
     github: luckyframework/lucky
@@ -26,3 +30,6 @@ development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: "~> 0.14.2"
+
+scripts:
+  postinstall: script/precompile_tasks
