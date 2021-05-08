@@ -26,14 +26,19 @@ module Breeze::ActionHelpers
 
     Lucky::Events::PipeEvent.subscribe do |event|
       next unless Breeze.settings.enabled
+      # TODO: move this to a config setting
+      next if event.name.includes?("breeze_")
 
-      req = Fiber.current.breeze_request
+      request = Fiber.current.breeze_request
       spawn do
-        Breeze::SaveBreezePipe.create!(
-          breeze_request_id: req.try(&.id),
-          name: event.name,
-          continued: event.continued
-        )
+        if req = request
+          Breeze::SaveBreezePipe.create!(
+            breeze_request_id: req.id,
+            name: event.name,
+            continued: event.continued,
+            position: event.position.to_s
+          )
+        end
       end
     end
   end

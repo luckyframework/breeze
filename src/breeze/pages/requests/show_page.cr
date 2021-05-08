@@ -59,7 +59,7 @@ class Breeze::Requests::ShowPage < Breeze::BreezeLayout
         heading_title: ->{ text "Pipes" },
         list: ->{
           req.breeze_pipes.each do |pipe|
-            mount Breeze::DescriptionListRow, "Foo", pipe.name
+            mount Breeze::DescriptionListRow, pipe.position, "#{pipe.name} - Continued: #{pipe.continued}"
           end
         }
     end
