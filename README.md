@@ -4,6 +4,12 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
 
 🚧 ** UNDER CONSTRUCTION - Things may change without notice ** 🚧
 
+| Easy debug logs | See your app requests |
+|---|---|---|---|---|
+|   |   |   |   |   |
+|   |   |   |   |   |
+|   |   |   |   |   |
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
@@ -89,7 +95,7 @@ Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension
 
     ```crystal
    require "breeze"
-   require "breeze/extensions/carbon"
+   require "breeze/extensions/breeze_carbon"
    ```
 
 2. Add your Email preview class to `src/emails/previews.cr`:
