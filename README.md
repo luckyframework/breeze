@@ -33,7 +33,7 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   # Add this line here
   require "breeze/tasks"
 
-  LuckyCli::Runner.run
+  LuckyTask::Runner.run
   ```
 
 5. Run `lucky breeze.install`

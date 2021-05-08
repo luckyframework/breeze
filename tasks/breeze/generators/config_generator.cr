@@ -1,6 +1,5 @@
 require "ecr"
 require "file_utils"
-require "lucky_cli"
 
 class Breeze::ConfigGenerator
   ECR.def_to_s "#{__DIR__}/templates/breeze_config.ecr"
