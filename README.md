@@ -87,44 +87,44 @@ Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension
 
 1. Add the require to your `src/shards.cr` right below your `require "breeze"`:
 
-    ```crystal
-   require "breeze"
-   require "breeze/extensions/carbon"
-   ```
+  ```crystal
+  require "breeze"
+  require "breeze/extensions/breeze_carbon"
+  ```
 
 2. Add your Email preview class to `src/emails/previews.cr`:
 
-   ```crystal
-   class Emails::Previews < Carbon::EmailPreviews
-     def previews : Hash(String, Carbon::Email)
-       {
-         "welcome_email"  => WelcomeEmail.new(UserQuery.first),
-         "password_reset" => PasswordResetRequestEmail.new(UserQuery.first),
-       } of String => Carbon::Email
-     end
-   end
-   ```
+  ```crystal
+  class Emails::Previews < Carbon::EmailPreviews
+    def previews : Array(Carbon::Email)
+      [
+        WelcomeEmail.new(UserQuery.first),
+        PasswordResetRequestEmail.new(UserQuery.first),
+      ] of Carbon::Email
+    end
+  end
+  ```
 
-3. Update your Breeze config in `config/breeze.cr`:
+3. Add the `BreezeCarbon` config to `config/breeze.cr`:
 
-   ```crystal
-   Breeze.configure do |settings|
-     # ... other settings
-     
-     # Set this to the name of your preview class
-     settings.email_previews = Emails::Previews
-   end
-   ```
-   
+  ```crystal
+  BreezeCarbon.configure do |settings|
+
+    # Set this to the name of your preview class
+    settings.email_previews = Emails::Previews
+  end
+  Breeze.register BreezeCarbon
+  ```
+
 ### Usage
 
 Just visit `/breeze/emails` in your browser, and you'll see your emails. Click the `HTML` button to see the HTML version of your email, or the `TEXT` to see the plain text version.
 
 ### Configuration
 
-By enabling this extension, Breeze will require a new setting `email_previews` which is the class that will contain your preview setup. This is so Breeze knows what you named the class.
+`BreezeCarbon` requires setting the `email_previews` setting to the name of your email preview class.
+Your email preview class should inherit from `Carbon::EmailPreviews`, and define an instance method `previews` which returns an `Array(Carbon::Email)`.
 
-Your email preview class should inherit from `Carbon::EmailPreviews`, and define an instance method `previews` which returns a `Hash(String, Carbon::Email)`. The `String` key is a key that will be passed through the URL to locate which email Breeze will display. The value will be an instance of the `Carbon::Email` to be rendered. Since each email requires different arguments in order to be instantiated, it's up to you to define how those values are set.
 
 ## Extending Breeze
 
