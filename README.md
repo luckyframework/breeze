@@ -104,7 +104,7 @@ Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension
 
     ```crystal
    require "breeze"
-   require "breeze/extensions/breeze_carbon"
+   require "breeze/extensions/carbon"
    ```
 
 2. Add your Email preview class to `src/emails/previews.cr`:
