@@ -1,5 +1,3 @@
-require "wordsmith"
-
 # TODO: Move this in to Carbon directly
 abstract class Carbon::EmailPreviews
   abstract def previews : Array(Carbon::Email)
