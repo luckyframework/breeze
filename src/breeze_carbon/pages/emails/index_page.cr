@@ -1,5 +1,5 @@
 class BreezeCarbon::Emails::IndexPage < Breeze::BreezeLayout
-  needs emails : Carbon::EmailPreviews::EmailLookup
+  needs emails : Array(Carbon::Email)
 
   def page_title : String
     "All Emails"
@@ -15,14 +15,14 @@ class BreezeCarbon::Emails::IndexPage < Breeze::BreezeLayout
         h2 "Preview Emails", class: "text-xl"
       end
       ul class: "mt-1 divide-y divide-gray-200" do
-        emails.each do |key, email|
-          email_row(key, email)
+        emails.each do |email|
+          email_row(email)
         end
       end
     end
   end
 
-  def email_row(key : String, email : Carbon::Email)
+  def email_row(email : Carbon::Email)
     li do
       div class: "flex items-center px-4 py-4 sm:px-4" do
         div class: "min-w-0 flex-1 flex items-center" do
@@ -33,12 +33,16 @@ class BreezeCarbon::Emails::IndexPage < Breeze::BreezeLayout
           end
         end
         div do
-          link "HTML", to: Emails::Show.with(key, plain_format: false), class: format_button_styles
+          link "HTML", to: Emails::Show.with(slug_for_email(email), plain_format: false), class: format_button_styles
           nbsp
-          link "TEXT", to: Emails::Show.with(key, plain_format: true), class: format_button_styles
+          link "TEXT", to: Emails::Show.with(slug_for_email(email), plain_format: true), class: format_button_styles
         end
       end
     end
+  end
+
+  private def slug_for_email(email : Carbon::Email) : String
+    email.class.name
   end
 
   private def format_button_styles : String
