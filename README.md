@@ -4,6 +4,21 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
 
 🚧 ** UNDER CONSTRUCTION - Things may change without notice ** 🚧
 
+## Screenshots
+
+| Easy debug logs | View your app requests |
+|-----------------|-----------------|
+| <img src="https://drive.google.com/uc?id=1K6SEJVzzx-DDfPz6LOX-9X72c-NMgtAf" width="300" /> | <img src="https://drive.google.com/uc?id=1uUlq8kGyIcf_Ug6_7ScA8oL6xQlUDrGd" width="300" /> |
+
+| Overview of a request | See queries |
+|-----------------------|-------------|
+| <img src="https://drive.google.com/uc?id=1oGFpbM5HbXgDkY92-TNA8zV6pePuH_yL" width="300" /> | <img src="https://drive.google.com/uc?id=1RV5nQoIoHPULjeCXsS2kHkCxn8BLYs6c" width="300" /> |
+
+| Create extensions | Preview emails |
+|-------------------|----------------|
+| <img src="https://drive.google.com/uc?id=1_dXug1TLn8R01Ky2SD_69m4EqmK4gLeq" width="300" /> | <img src="https://drive.google.com/uc?id=1NXPIRLv9BAFpw6YAOFVqyuZU_w_eYHfJ" width="300" /> |
+
+
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
