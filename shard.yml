@@ -8,6 +8,16 @@ crystal: ">= 0.36.1"
 
 license: MIT
 
+targets:
+  lucky.breeze.install:
+    main: src/precompiled_tasks/breeze_install.cr
+
+scripts:
+  postinstall: shards build
+
+executables:
+  - lucky.breeze.install
+
 dependencies:
   lucky:
     github: luckyframework/lucky
