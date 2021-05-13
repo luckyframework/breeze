@@ -29,8 +29,8 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
        github: luckyframework/breeze
    ```
 
-2. Run `shards install`
-3. Add the require to your `src/shards.cr`:
+1. Run `shards install`
+1. Add the require to your `src/shards.cr`:
 
    ```crystal
    require "avram"
@@ -40,7 +40,7 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
    require "breeze"
    ```
 
-4. Add the tasks to your `tasks.cr`:
+1. Add the tasks to your `tasks.cr`:
 
   ```crystal
   # ...
@@ -51,9 +51,21 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   LuckyTask::Runner.run
   ```
 
-5. Run `lucky breeze.install`
+1. Add the spec helpers to your `spec/spec_helper.cr`:
 
-6. Run `lucky db.migrate`
+  ```crystal
+  require "spec"
+  require "lucky_flow"
+  require "../src/app"
+  # ...
+  require "breeze/spec_helpers"
+
+  require "./setup/**"
+  ```
+
+1. Run `lucky breeze.install`
+
+1. Run `lucky db.migrate`
 
 ## Usage
 
