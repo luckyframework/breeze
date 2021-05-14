@@ -27,11 +27,20 @@ module Breeze::ActionHelpers
 
   private def store_breeze_request
     if allow_breeze(context)
+      if multipart?
+        request_body = build_request_body_with_file(context)
+        # If we don't rewind here, the request fails when it gets to
+        # the action.
+        request.body.try(&.rewind)
+      else
+        request_body = request.body.try(&.to_s)
+      end
+
       req = Breeze::SaveBreezeRequest.create!(
         path: request.resource,
         method: request.method,
         action: self.class.name,
-        body: request.body.try(&.to_s),
+        body: request_body,
         parsed_params: JSON.parse(params.to_h.to_json),
         session: JSON.parse(session.to_json),
         headers: JSON.parse(request.headers.to_h.to_json)
@@ -62,5 +71,32 @@ module Breeze::ActionHelpers
   private def allow_breeze(context : HTTP::Server::Context)
     should_skip = settings.skip_pipes_if.try(&.call(context))
     Breeze.settings.enabled && !should_skip
+  end
+
+  private def multipart? : Bool
+    !!request.headers["Content-Type"]?.try(&.starts_with?("multipart/form-data"))
+  end
+
+  # This method re-builds the `request.body` output, and replaces file uploads
+  # with a placeholder. This is because binary files will be too large, and contain
+  # invalid string characters to be stored in the database.
+  private def build_request_body_with_file(context : HTTP::Server::Context) : String
+    content_type = context.request.headers["Content-Type"]
+    index = content_type.rindex("boundary=").try(&.+(9)) || 0
+    boundary = content_type[index, content_type.size]
+
+    String.build do |str|
+      HTTP::FormData.parse(context.request) do |part|
+        disposition = part.headers["Content-Disposition"]
+
+        str << "#{boundary} Content-Disposition: #{disposition} "
+
+        if part.filename
+          str << %{<#Lucky::UploadedFile @filename="#{part.filename}">}
+        else
+          str << part.body.gets_to_end
+        end
+      end
+    end
   end
 end
