@@ -51,9 +51,21 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
   LuckyTask::Runner.run
   ```
 
-5. Run `lucky breeze.install`
+5. Add the spec helpers to your `spec/spec_helper.cr`:
 
-6. Run `lucky db.migrate`
+  ```crystal
+  require "spec"
+  require "lucky_flow"
+  require "../src/app"
+  # ...
+  require "breeze/spec_helpers"
+
+  require "./setup/**"
+  ```
+
+6. Run `lucky breeze.install`
+
+7. Run `lucky db.migrate`
 
 ## Usage
 
