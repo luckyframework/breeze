@@ -23,6 +23,24 @@ module Breeze::ActionHelpers
         )
       end
     end
+
+    Lucky::Events::PipeEvent.subscribe do |event|
+      next unless Breeze.settings.enabled
+      # TODO: move this to a config setting
+      next if event.name.start_with?("store_breeze_")
+
+      request = Fiber.current.breeze_request
+      spawn do
+        if req = request
+          Breeze::SaveBreezePipe.create!(
+            breeze_request_id: req.id,
+            name: event.name,
+            continued: event.continued,
+            position: event.position.to_s
+          )
+        end
+      end
+    end
   end
 
   private def store_breeze_request
