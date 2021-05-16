@@ -24,13 +24,17 @@ jobs:
     container:
       image: crystallang/crystal:0.36.1
     steps:
-    - uses: actions/checkout@v2
-    - name: Install shards
-      run: shards install
-    - name: Cache Crystal
-      uses: actions/cache@v1
-      with:
-        path: ~/.cache/crystal
-        key: ${{ runner.os }}-crystal
-    - name: Run tests
-      run: crystal spec
+      - uses: actions/checkout@v2
+      - name: Cache Crystal
+        uses: actions/cache@v1
+        with:
+          path: ~/.cache/crystal
+          key: ${{ runner.os }}-crystal
+      - name: Install shards
+        run: shards install
+      - name: Install Lucky CLI
+        run: |
+          crystal build lib/lucky_cli/src/lucky.cr --no-debug --release
+          cp lucky /usr/local/bin
+      - name: Run tests
+        run: crystal spec
