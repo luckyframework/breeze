@@ -13,7 +13,7 @@ module Breeze::ActionHelpers
       next if event.query.includes?("breeze_") || event.query.includes?("information_schema")
 
       req = Fiber.current.breeze_request
-      spawn do
+      spawn(name: "Create Breeze::SaveBreezeSqlStatement") do
         Breeze::SaveBreezeSqlStatement.create!(
           breeze_request_id: req.try(&.id),
           statement: event.query,
@@ -27,10 +27,10 @@ module Breeze::ActionHelpers
     Lucky::Events::PipeEvent.subscribe do |event|
       next unless Breeze.settings.enabled
       # TODO: move this to a config setting
-      next if event.name.start_with?("store_breeze_")
+      next if event.name.starts_with?("store_breeze_")
 
       request = Fiber.current.breeze_request
-      spawn do
+      spawn(name: "Create Breeze::SaveBreezePipe") do
         if req = request
           Breeze::SaveBreezePipe.create!(
             breeze_request_id: req.id,
@@ -73,7 +73,7 @@ module Breeze::ActionHelpers
   private def store_breeze_response
     if allow_breeze(context)
       req = Fiber.current.breeze_request.not_nil!
-      spawn do
+      spawn(name: "Create Breeze::SaveBreezeResponse") do
         Breeze::SaveBreezeResponse.create!(
           breeze_request_id: req.id,
           status: response.status_code,
