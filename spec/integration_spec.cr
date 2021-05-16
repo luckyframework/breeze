@@ -37,6 +37,7 @@ private def setup_and_compile_project_with_breeze
 
     should_run_successfully "script/setup"
     should_run_successfully "lucky breeze.install"
+    File.read("config/breeze.cr").should contain("Breeze.configure")
   end
 end
 
