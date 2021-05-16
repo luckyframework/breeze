@@ -25,18 +25,14 @@ jobs:
       image: crystallang/crystal:0.36.1
     services:
       postgres:
-        image: postgres:12
+        image: postgres:12-alpine
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
       - name: Install PostgreSQL client
@@ -86,3 +82,5 @@ jobs:
           cp lucky /usr/local/bin
       - name: Run tests
         run: crystal spec
+        env:
+          DB_HOST: postgres
