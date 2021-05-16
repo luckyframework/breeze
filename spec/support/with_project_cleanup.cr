@@ -10,8 +10,7 @@ module WithProjectCleanup
         shell: true
       )
 
-      output = output.rewind.to_s
-      output.starts_with?("Done dropping").should eq true
+      output.gets_to_end.should contain("Done dropping")
     } unless skip_db_drop
   ensure
     FileUtils.rm_rf project_directory

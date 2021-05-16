@@ -6,7 +6,7 @@ include ModifyFiles
 
 describe "Initializing a new web project with Breeze" do
   it "runs a full integration" do
-    puts "Web app: Running integration spec. This might take awhile...".colorize(:yellow)
+    puts "Breeze Specs: Running integration spec. This might take awhile...".colorize(:yellow)
     with_project_cleanup do
       should_run_successfully "lucky init.custom test-project"
 
