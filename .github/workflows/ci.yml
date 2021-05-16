@@ -23,6 +23,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:0.36.1
+    env:
+      LUCKY_ENV: test
+      DB_HOST: postgres
     services:
       postgres:
         image: postgres:12-alpine
@@ -38,16 +41,14 @@ jobs:
       - name: Install PostgreSQL client
         run: |
           apt-get update
-          apt-get -yqq install lsb-release wget gnupg
-          sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-          apt-get update
           apt-get -yqq install libpq-dev postgresql-client-12
       - name: Cache Crystal
         uses: actions/cache@v1
         with:
           path: ~/.cache/crystal
           key: ${{ runner.os }}-crystal
+      - name: Install browser
+        run: apt-get -yqq install chromium-browser
       - uses: actions/setup-node@v2.1.5
         with:
           node-version: "12.x"
@@ -82,5 +83,3 @@ jobs:
           cp lucky /usr/local/bin
       - name: Run tests
         run: crystal spec
-        env:
-          DB_HOST: postgres
