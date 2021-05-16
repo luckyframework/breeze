@@ -23,6 +23,20 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: crystallang/crystal:0.36.1
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v2
       - name: Cache Crystal
@@ -30,6 +44,20 @@ jobs:
         with:
           path: ~/.cache/crystal
           key: ${{ runner.os }}-crystal
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: "12.x"
+      - name: Cache node modules
+        uses: actions/cache@v2.1.5
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - name: Install shards
         run: shards install
       - name: Install Lucky CLI
