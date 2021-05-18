@@ -4,13 +4,14 @@ module WithProjectCleanup
 
     FileUtils.cd(project_directory) {
       output = IO::Memory.new
-      Process.run(
+      result = Process.run(
         "lucky db.drop",
         output: output,
         shell: true
       )
 
-      output.gets_to_end.should contain("Done dropping")
+      result.normal_exit?.should eq(true)
+      output.to_s.should contain("Done dropping")
     } unless skip_db_drop
   ensure
     FileUtils.rm_rf project_directory
