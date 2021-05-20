@@ -2,8 +2,6 @@
 
 Breeze is a development dashboard for [Lucky Framework](https://luckyframework.org/) that helps you to debug and fine-tune your application.
 
-🚧 ** UNDER CONSTRUCTION - Things may change without notice ** 🚧
-
 ## Screenshots
 
 | Easy debug logs | View your app requests |
@@ -110,7 +108,9 @@ end
 
 Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension that allows you to preview your emails right in the browser.
 
-### Installing
+If you develop a Breeze extension, let us know and we will list it here!
+
+### Installing BreezeCarbon
 
 1. Add the require to your `src/shards.cr` right below your `require "breeze"`:
 
@@ -143,11 +143,11 @@ Breeze comes with a [Carbon](https://github.com/luckyframework/carbon) extension
   Breeze.register BreezeCarbon
   ```
 
-### Usage
+### Using BreezeCarbon
 
 Just visit `/breeze/emails` in your browser, and you'll see your emails. Click the `HTML` button to see the HTML version of your email, or the `TEXT` to see the plain text version.
 
-### Configuration
+### Configuring BreezeCarbon
 
 `BreezeCarbon` requires setting the `email_previews` setting to the name of your email preview class.
 Your email preview class should inherit from `Carbon::EmailPreviews`, and define an instance method `previews` which returns an `Array(Carbon::Email)`.
@@ -155,8 +155,21 @@ Your email preview class should inherit from `Carbon::EmailPreviews`, and define
 
 ## Extending Breeze
 
-coming soon....
+1. Create your new extension module (e.g. `module MyBreezeExt`), and add `extend Breeze::Extension`
+2. Define your navbar link method in your module:
+```crystal
+def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+  Breeze::NavbarLink.new(
+    context: context,
+    link_text: "Breeze Ext",
+    link_to: MyBreezeExt::Index.path
+  )
+end
+```
+3. Create your actions, and pages like a standard Lucky app. Actions inherit from `Breeze::BreezeAction`. Pages inherit from `Breeze::BreezeLayout`.
+4. Lucky apps that include Breeze and your extension will need to add `Breeze.register MyBreezeExt`.
 
+For more examples on creating a Breeze extension, look at the `BreezeCarbon` extension in `src/extensions/breeze_carbon.cr`
 
 ## Development
 
