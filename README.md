@@ -20,49 +20,40 @@ Breeze is a development dashboard for [Lucky Framework](https://luckyframework.o
 ## Installation
 
 1. Add the dependency to your `shard.yml`:
-
-   ```yaml
-   dependencies:
-     breeze:
-       github: luckyframework/breeze
-   ```
-
+```yaml
+dependencies:
+  breeze:
+    github: luckyframework/breeze
+```
 2. Run `shards install`
 3. Add the require to your `src/shards.cr`:
-
-   ```crystal
-   require "avram"
-   require "lucky"
-   # ...
-   # Add this line here
-   require "breeze"
-   ```
-
+```crystal
+require "avram"
+require "lucky"
+# ...
+# Add this line here
+require "breeze"
+```
 4. Add the tasks to your `tasks.cr`:
+```crystal
+# ...
 
-  ```crystal
-  # ...
+# Add this line here
+require "breeze/tasks"
 
-  # Add this line here
-  require "breeze/tasks"
-
-  LuckyTask::Runner.run
-  ```
-
+LuckyTask::Runner.run
+```
 5. Add the spec helpers to your `spec/spec_helper.cr`:
+```crystal
+require "spec"
+require "lucky_flow"
+require "../src/app"
+# ...
+require "breeze/spec_helpers"
 
-  ```crystal
-  require "spec"
-  require "lucky_flow"
-  require "../src/app"
-  # ...
-  require "breeze/spec_helpers"
-
-  require "./setup/**"
-  ```
-
+require "./setup/**"
+```
 6. Run `lucky breeze.install`
-
 7. Run `lucky db.migrate`
 
 ## Usage
@@ -113,35 +104,30 @@ If you develop a Breeze extension, let us know and we will list it here!
 ### Installing BreezeCarbon
 
 1. Add the require to your `src/shards.cr` right below your `require "breeze"`:
-
-  ```crystal
-  require "breeze"
-  require "breeze/extensions/breeze_carbon"
-  ```
-
+```crystal
+require "breeze"
+require "breeze/extensions/breeze_carbon"
+```
 2. Add your Email preview class to `src/emails/previews.cr`:
-
-  ```crystal
-  class Emails::Previews < Carbon::EmailPreviews
-    def previews : Array(Carbon::Email)
-      [
-        WelcomeEmail.new(UserQuery.first),
-        PasswordResetRequestEmail.new(UserQuery.first),
-      ] of Carbon::Email
-    end
+```crystal
+class Emails::Previews < Carbon::EmailPreviews
+  def previews : Array(Carbon::Email)
+    [
+      WelcomeEmail.new(UserQuery.first),
+      PasswordResetRequestEmail.new(UserQuery.first),
+    ] of Carbon::Email
   end
-  ```
-
+end
+```
 3. Add the `BreezeCarbon` config to `config/breeze.cr`:
+```crystal
+BreezeCarbon.configure do |settings|
 
-  ```crystal
-  BreezeCarbon.configure do |settings|
-
-    # Set this to the name of your preview class
-    settings.email_previews = Emails::Previews
-  end
-  Breeze.register BreezeCarbon
-  ```
+  # Set this to the name of your preview class
+  settings.email_previews = Emails::Previews
+end
+Breeze.register BreezeCarbon
+```
 
 ### Using BreezeCarbon
 
