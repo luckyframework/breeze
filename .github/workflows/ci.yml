@@ -71,6 +71,7 @@ jobs:
         run: |
           crystal build lib/lucky_cli/src/lucky.cr --no-debug --release
           cp lucky /usr/local/bin
+          echo $(pwd)
       - name: Run tests
         run: crystal spec
         env:
