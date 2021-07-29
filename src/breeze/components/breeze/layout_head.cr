@@ -1,7 +1,5 @@
 class Breeze::LayoutHead < Breeze::BreezeComponent
   needs page_title : String
-  # This is used by the 'csrf_meta_tags' method
-  needs context : HTTP::Server::Context
 
   def render
     head do

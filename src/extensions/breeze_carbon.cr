@@ -11,9 +11,8 @@ module BreezeCarbon
     setting email_previews : Carbon::EmailPreviews.class, example: "Emails::Previews"
   end
 
-  def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+  def self.navbar_link : Breeze::NavbarLink
     Breeze::NavbarLink.new(
-      context: context,
       link_text: "Emails",
       link_to: BreezeCarbon::Emails::Index.path
     )

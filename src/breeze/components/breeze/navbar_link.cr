@@ -1,5 +1,4 @@
 class Breeze::NavbarLink < Breeze::BreezeComponent
-  needs context : HTTP::Server::Context
   needs link_text : String
   needs link_to : String
 

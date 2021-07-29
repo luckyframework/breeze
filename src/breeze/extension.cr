@@ -5,8 +5,8 @@
 # module BreezeCustom
 #   extend Breeze::Extension
 #
-#   def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
-#     Breeze::NavbarLink.new(context: context, link_text: "Custom", link_to: BreezeCustom::Index.path)
+#   def self.navbar_link : Breeze::NavbarLink
+#     Breeze::NavbarLink.new(link_text: "Custom", link_to: BreezeCustom::Index.path)
 #   end
 # end
 # ```
@@ -18,5 +18,9 @@
 # ```
 #
 module Breeze::Extension
-  abstract def navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+  def navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+    {% raise "Breeze::Extension navbar_link no longer requires `context` to be passed in" %}
+  end
+
+  abstract def navbar_link : Breeze::NavbarLink
 end

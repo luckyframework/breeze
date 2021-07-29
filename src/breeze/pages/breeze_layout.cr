@@ -8,7 +8,7 @@ abstract class Breeze::BreezeLayout
     html_doctype
 
     html lang: "en" do
-      mount Breeze::LayoutHead, page_title: page_title, context: context
+      mount Breeze::LayoutHead, page_title: page_title
 
       body class: "bg-gray-100" do
         tailwind_stacked
@@ -24,7 +24,7 @@ abstract class Breeze::BreezeLayout
             div class: "flex items-center" do
               div class: "hidden md:block" do
                 div class: "flex items-baseline" do
-                  mount Breeze::NavbarLinks, context: context
+                  mount Breeze::NavbarLinks
                 end
               end
               hamburger_menu
@@ -34,7 +34,7 @@ abstract class Breeze::BreezeLayout
           end
         end
 
-        mount Breeze::MobileNavbar, context: context
+        mount Breeze::MobileNavbar
       end
 
       main class: "-mt-32" do
