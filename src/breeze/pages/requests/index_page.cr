@@ -27,12 +27,12 @@ class Breeze::Requests::IndexPage < Breeze::BreezeLayout
       link to: Requests::Show.with(req.id), class: "block hover:bg-indigo-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out" do
         div class: "flex items-center px-4 py-4 sm:px-4" do
           div class: "min-w-0 flex-1 flex items-center" do
-            div class: "min-w-0 flex-1 px-4 sm:grid grid-cols-3 md:grid-cols-4 gap-6" do
-              div class: "font-mono" { mount Breeze::Badge, req }
-              div class: "hidden sm:block" do
+            div class: "w-full sm:flex px-4 gap-6" do
+              div class: "w-full sm:w-1/2 font-mono" { mount Breeze::Badge, req }
+              div class: "sm:w-1/4 hidden sm:block" do
                 div req.action, class: "text-sm font-mono leading-5 text-indigo-700 truncate"
               end
-              div class: "text-sm leading-5 text-gray-500 mt-2 sm:mt-0" do
+              div class: "w-full sm:w-1/4 text-sm leading-5 text-gray-500 mt-2 sm:mt-0" do
                 text "#{time_ago_in_words(req.created_at)} ago"
               end
             end
