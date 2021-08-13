@@ -79,7 +79,7 @@ Breeze.configure do |settings|
   settings.database = AppDatabase
 
   # Enable Breeze only for this environment
-  settings.enabled = Lucky::Env.development?
+  settings.enabled = LuckyEnv.development?
 end
 
 # Configuration settings for Actions
@@ -144,9 +144,8 @@ Your email preview class should inherit from `Carbon::EmailPreviews`, and define
 1. Create your new extension module (e.g. `module MyBreezeExt`), and add `extend Breeze::Extension`
 2. Define your navbar link method in your module:
 ```crystal
-def self.navbar_link(context : HTTP::Server::Context) : Breeze::NavbarLink
+def self.navbar_link : Breeze::NavbarLink
   Breeze::NavbarLink.new(
-    context: context,
     link_text: "Breeze Ext",
     link_to: MyBreezeExt::Index.path
   )

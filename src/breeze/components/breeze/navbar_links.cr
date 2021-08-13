@@ -1,11 +1,9 @@
 class Breeze::NavbarLinks < Breeze::BreezeComponent
-  needs context : HTTP::Server::Context
-
   def render
     mount_link("Requests", to: Breeze::Requests::Index)
     mount_link("Queries", to: Breeze::Queries::Index)
     Breeze.extensions.each do |extension|
-      mount extension.navbar_link(context)
+      mount_instance extension.navbar_link(context)
     end
   end
 

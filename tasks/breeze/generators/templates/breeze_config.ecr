@@ -6,7 +6,7 @@ Breeze.configure do |settings|
   settings.database = AppDatabase
 
   # Enable Breeze only for this environment
-  settings.enabled = Lucky::Env.development?
+  settings.enabled = LuckyEnv.development?
 end
 
 # To add BreezeCarbon, be sure to require "breeze/extensions/breeze_carbon"

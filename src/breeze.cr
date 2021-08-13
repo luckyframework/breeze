@@ -25,7 +25,7 @@ module Breeze
 
   Habitat.create do
     setting database : Avram::Database.class, example: "AppDatabase"
-    setting enabled : Bool, example: "Lucky::Env.development?"
+    setting enabled : Bool, example: "LuckyEnv.development?"
   end
 
   def self.register(extension : Breeze::Extension)

@@ -91,10 +91,6 @@ module Breeze::ActionHelpers
     Breeze.settings.enabled && !should_skip
   end
 
-  private def multipart? : Bool
-    !!request.headers["Content-Type"]?.try(&.starts_with?("multipart/form-data"))
-  end
-
   # This method re-builds the `request.body` output, and replaces file uploads
   # with a placeholder. This is because binary files will be too large, and contain
   # invalid string characters to be stored in the database.

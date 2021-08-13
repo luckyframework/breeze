@@ -20,7 +20,7 @@ private def setup_and_compile_project_with_breeze
   FileUtils.cd "test-project" do
     insert_text in: "shard.yml", content: <<-TEXT
       breeze:
-        github: luckyframework/breeze
+        path: #{ENV["BREEZE_TEST_LOCATION"]}
     TEXT
 
     insert_text in: "src/shards.cr", content: <<-TEXT
