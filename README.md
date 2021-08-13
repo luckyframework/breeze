@@ -37,10 +37,13 @@ require "breeze"
 4. Add the tasks to your `tasks.cr`:
 ```crystal
 # ...
+require "./src/app"
+require "lucky_task"
 
 # Add this line here
 require "breeze/tasks"
 
+#...
 LuckyTask::Runner.run
 ```
 5. Add the spec helpers to your `spec/spec_helper.cr`:
