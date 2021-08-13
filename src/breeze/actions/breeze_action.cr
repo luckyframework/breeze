@@ -16,7 +16,7 @@ abstract class Breeze::BreezeAction < Lucky::Action
     if Breeze.settings.enabled
       continue
     else
-      plain_text "This action is not permitted", status: :unauthorized
+      raise Lucky::RouteNotFoundError.new(context)
     end
   end
 end
