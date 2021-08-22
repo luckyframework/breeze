@@ -12,8 +12,10 @@ class BreezeCarbon::Emails::Render < Breeze::BreezeAction
       end
     else
       if html_body = email.html_body
+        pared_markup = parse_body_and_replace_links(html_body)
+
         send_text_response(
-          html_body,
+          pared_markup,
           content_type: "text/html",
           status: 200
         )
@@ -21,6 +23,23 @@ class BreezeCarbon::Emails::Render < Breeze::BreezeAction
         render_missing_template_error(email, "html")
       end
     end
+  end
+
+  # Scan all links in the email, and add the target _blank
+  # This is so you can click on the links, and they don't
+  # open up in the iframe.
+  private def parse_body_and_replace_links(body : String)
+    body.scan(/<a\s*([^>]+)>/) do |match|
+      if data = match[1]?
+        if data.includes?(%(target=))
+          # target is already included
+        else
+          body = body.sub("<a #{data}", %(<a #{data} target="_blank"))
+        end
+      end
+    end
+
+    body
   end
 
   private def render_missing_template_error(email : Carbon::Email, template : String)
