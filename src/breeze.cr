@@ -20,7 +20,7 @@ require "./breeze/components/**"
 require "./breeze/pages/**"
 
 module Breeze
-  VERSION = "0.1.0"
+  VERSION = "0.2.0"
   class_getter extensions = [] of Breeze::Extension
 
   Habitat.create do
