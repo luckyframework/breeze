@@ -13,7 +13,7 @@ targets:
     main: src/precompiled_tasks/breeze_install.cr
 
 scripts:
-  postinstall: shards build
+  postinstall: shards build --without-development
 
 executables:
   - lucky.breeze.install
