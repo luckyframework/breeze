@@ -65,6 +65,7 @@ module Breeze::ActionHelpers
       )
       Lucky::Log.dexter.debug { {debug_at: Breeze::Requests::Show.url(req.id)} }
       Fiber.current.breeze_request = req
+      Fiber.current.breeze_request_start = Time.monotonic
     end
 
     continue
@@ -72,11 +73,13 @@ module Breeze::ActionHelpers
 
   private def store_breeze_response
     if allow_breeze(context)
+      duration = Time.monotonic - Fiber.current.breeze_request_start.not_nil!
       req = Fiber.current.breeze_request.not_nil!
       spawn(name: "Create Breeze::SaveBreezeResponse") do
         Breeze::SaveBreezeResponse.create!(
           breeze_request_id: req.id,
           status: response.status_code,
+          elapsed_text: duration.to_elapsed_text,
           session: JSON.parse(session.to_json),
           headers: JSON.parse(response.headers.to_h.to_json)
         )
