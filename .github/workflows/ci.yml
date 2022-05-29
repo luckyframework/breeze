@@ -2,7 +2,7 @@ name: Breeze CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
     branches: "*"
 
@@ -14,11 +14,13 @@ jobs:
         crystal_version:
           - 1.0.0
           - 1.1.0
+          - 1.2.0
+          - 1.3.0
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install Crystal
-        uses: oprypin/install-crystal@v1
+        uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal_version }}
       - name: Install shards
@@ -34,6 +36,8 @@ jobs:
         crystal_version:
           - 1.0.0
           - 1.1.0
+          - 1.2.0
+          - 1.3.0
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -48,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2.3.4
       - name: Install Crystal
-        uses: oprypin/install-crystal@v1
+        uses: crystal-lang/install-crystal@v1
         with:
           crystal: ${{ matrix.crystal_version }}
       - uses: actions/setup-node@v2.3.0

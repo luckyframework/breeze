@@ -87,7 +87,7 @@ module Breeze::ActionHelpers
   end
 
   private def allow_breeze(context : HTTP::Server::Context)
-    should_skip = settings.skip_pipes_if.try(&.call(context))
+    should_skip = Breeze::ActionHelpers.settings.skip_pipes_if.try(&.call(context))
     Breeze.settings.enabled && !should_skip
   end
 
