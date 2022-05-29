@@ -4,7 +4,7 @@ version: 0.2.0
 authors:
   - Jeremy Woertink <jeremywoertink@gmail.com>
 
-crystal: ">= 1.0.0"
+crystal: ">= 1.4.0"
 
 license: MIT
 
@@ -15,27 +15,24 @@ targets:
 scripts:
   postinstall: shards build --without-development
 
-executables:
-  - lucky.breeze.install
-
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ">= 0.28.0"
+    version: ">= 0.30.1"
   avram:
     github: luckyframework/avram
-    version: ">= 0.21.0"
+    version: ">= 0.23.0"
   pulsar:
     github: luckyframework/pulsar
-    version: ">= 0.2.0"
+    version: ">= 0.2.3"
   lucky_task:
     github: luckyframework/lucky_task
-    version: ">= 0.1.0"
+    version: ">= 0.1.1"
 
 development_dependencies:
   ameba:
     github: crystal-ameba/ameba
-    version: "~> 0.14.2"
+    version: "~> 1.0.0"
   lucky_cli:
     github: luckyframework/lucky_cli
-    version: ">= 0.28.0"
+    version: ">= 0.30.0"
