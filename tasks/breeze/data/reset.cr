@@ -17,6 +17,6 @@ class Breeze::Data::Reset < LuckyTask::Task
     output.puts "Truncating tables #{table_names.colorize(:green)}"
 
     Breeze.settings.database.exec statement
-    puts "done."
+    output.puts "done."
   end
 end

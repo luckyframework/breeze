@@ -23,6 +23,8 @@ private def setup_and_compile_project_with_breeze
         path: #{ENV["BREEZE_TEST_LOCATION"]}
     TEXT
 
+    should_run_successfully "script/setup"
+
     insert_text in: "src/shards.cr", content: <<-TEXT
     require "breeze"
     TEXT
@@ -35,8 +37,9 @@ private def setup_and_compile_project_with_breeze
     require "breeze/spec_helpers"
     TEXT
 
-    should_run_successfully "script/setup"
     should_run_successfully "lucky breeze.install"
+    should_run_successfully "lucky db.migrate"
+
     File.read("config/breeze.cr").should contain("Breeze.configure")
   end
 end
