@@ -1,6 +1,7 @@
 require "pulsar"
-require "avram"
 require "lucky"
+require "avram"
+require "avram/lucky"
 require "./charms/*"
 require "./breeze/extension"
 require "./breeze/models/*"
