@@ -72,14 +72,15 @@ module Breeze::ActionHelpers
 
   private def store_breeze_response
     if allow_breeze(context)
-      req = Fiber.current.breeze_request.not_nil!
-      spawn(name: "Create Breeze::SaveBreezeResponse") do
-        Breeze::SaveBreezeResponse.create!(
-          breeze_request_id: req.id,
-          status: response.status_code,
-          session: JSON.parse(session.to_json),
-          headers: JSON.parse(response.headers.to_h.to_json)
-        )
+      if req = Fiber.current.breeze_request
+        spawn(name: "Create Breeze::SaveBreezeResponse") do
+          Breeze::SaveBreezeResponse.create!(
+            breeze_request_id: req.id,
+            status: response.status_code,
+            session: JSON.parse(session.to_json),
+            headers: JSON.parse(response.headers.to_h.to_json)
+          )
+        end
       end
     end
 

@@ -4,7 +4,7 @@ version: 0.2.0
 authors:
   - Jeremy Woertink <jeremywoertink@gmail.com>
 
-crystal: ">= 1.4.0"
+crystal: ~> 1.4
 
 license: MIT
 
@@ -18,21 +18,21 @@ scripts:
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ">= 1.0.0-rc1"
+    version: ~> 1.0
   avram:
     github: luckyframework/avram
-    version: ">= 1.0.0-rc1"
+    version: ~> 1.0
   pulsar:
     github: luckyframework/pulsar
-    version: ">= 0.2.3"
+    version: ~> 0.2
   lucky_task:
     github: luckyframework/lucky_task
-    version: ">= 0.1.1"
+    version: ~> 0.1
 
 development_dependencies:
-  ameba:
-    github: crystal-ameba/ameba
-    version: "~> 1.1.0"
   lucky_cli:
     github: luckyframework/lucky_cli
-    version: ">= 1.0.0-rc1"
+    version: ~> 1.0
+  carbon:
+    github: luckyframework/carbon
+    version: ~> 0.3
