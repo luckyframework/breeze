@@ -161,7 +161,7 @@ For more examples on creating a Breeze extension, look at the `BreezeCarbon` ext
 
 ## Development
 
-Install shards `shards install`, and start making changes. Be sure to run `./bin/ameba`, and the crystal formatter `crystal tool format spec src`.
+Install shards `shards install`, and start making changes. Be sure to run [`ameba`](https://github.com/crystal-ameba/ameba), and the crystal formatter `crystal tool format spec src`.
 
 Read through the issues for things you can work on. If you have an idea, feel free to open a new issue!
 
