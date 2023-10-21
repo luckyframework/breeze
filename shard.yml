@@ -18,16 +18,16 @@ scripts:
 dependencies:
   lucky:
     github: luckyframework/lucky
-    version: ~> 1.0
+    version: ">= 1.0, < 1.1"
   avram:
     github: luckyframework/avram
-    version: ~> 1.0
+    version: ">= 1.0, < 1.1"
   pulsar:
     github: luckyframework/pulsar
-    version: ~> 0.2
+    version: ">= 0.2, < 0.3"
   lucky_task:
     github: luckyframework/lucky_task
-    version: ~> 0.1
+    version: ">= 0.1, < 0.2"
 
 development_dependencies:
   lucky_cli:
