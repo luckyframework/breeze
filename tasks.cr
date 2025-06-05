@@ -7,6 +7,7 @@
 # ```
 
 require "lucky_task"
+require "avram"
 
 # Require all of the built-in Breeze tasks
 require "./tasks/**"
