@@ -9,7 +9,7 @@ crystal: ">= 1.10"
 license: MIT
 
 executables:
-  - lucky.breeze.install
+  - lucky.breeze.install.cr
 
 dependencies:
   lucky:

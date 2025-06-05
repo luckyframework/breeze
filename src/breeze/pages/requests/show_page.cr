@@ -26,7 +26,7 @@ class Breeze::Requests::ShowPage < Breeze::BreezeLayout
         list: -> {
           mount Breeze::DescriptionListRow, "Action", req.action
           req.breeze_response.try do |resp|
-            mount Breeze::DescriptionListRow, "Response Status", "#{resp.status} #{Wordsmith::Inflector.humanize(HTTP::Status.from_value?(resp.status))}"
+            mount Breeze::DescriptionListRow, "Response Status", "#{resp.status} #{Wordsmith::Inflector.humanize(HTTP::Status.from_value?(resp.status).to_s)}"
           end
           mount Breeze::DescriptionListRow, "Request Body", req.body || "No body"
           mount Breeze::DescriptionListRow, "Request Params", req.parsed_params.to_s || "No params"

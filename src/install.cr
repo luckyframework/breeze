@@ -1,5 +1,6 @@
+require "lucky_task"
 require "colorize"
-require "../tasks/generators/*"
+require "./install/generators/*"
 
 class Breeze::Install < LuckyTask::Task
   summary "Installs the required files for running Breeze"
