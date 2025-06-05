@@ -1,6 +1,12 @@
 /docs/
 /lib/
-/bin/
+/bin/ameba
+/bin/ameba.cr
+/bin/lucky.gen.*
+/bin/lucky.exec
+/bin/lucky.exec.cr
+/bin/lucky.watch
+/bin/lucky.watch.cr
 /.shards/
 *.dwarf
 

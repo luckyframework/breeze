@@ -4,16 +4,12 @@ version: 0.2.0
 authors:
   - Jeremy Woertink <jeremywoertink@gmail.com>
 
-crystal: ~> 1.4
+crystal: ">= 1.10"
 
 license: MIT
 
-targets:
-  lucky.breeze.install:
-    main: src/precompiled_tasks/breeze_install.cr
-
-scripts:
-  postinstall: shards build --without-development
+executables:
+  - lucky.breeze.install
 
 dependencies:
   lucky:
@@ -27,7 +23,7 @@ dependencies:
     version: ~> 0.2
   lucky_task:
     github: luckyframework/lucky_task
-    version: ~> 0.1
+    version: ~> 0.3
 
 development_dependencies:
   lucky_cli:
