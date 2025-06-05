@@ -23,7 +23,7 @@ private def setup_and_compile_project_with_breeze
         path: #{ENV["BREEZE_TEST_LOCATION"]}
     TEXT
 
-    should_run_successfully "script/setup"
+    should_run_successfully "crystal script/setup.cr"
 
     insert_text in: "src/shards.cr", content: <<-TEXT
     require "breeze"
