@@ -1,18 +1,20 @@
-# Require this file from your project's `tasks.cr` file:
-# ```
-# # ...
-# require "breeze/tasks"
+# This file loads your app and all your tasks when running 'lucky'
 #
-# LuckyCli::Runner.run
-# ```
+# Run 'lucky --help' to see all available tasks.
+#
+# Learn to create your own tasks:
+# https://luckyframework.org/guides/command-line-tasks/custom-tasks
 
+# See `LuckyEnv#task?`
+ENV["LUCKY_TASK"] = "true"
+
+require "./src/breeze"
 require "lucky_task"
-require "avram"
 
-# Require all of the built-in Breeze tasks
+# You can add your own tasks here in the ./tasks folder
 require "./tasks/**"
 
-# Require the DB Migrations.
-# This allows you to run `lucky db.migrate` from your
-# project, without having to require anything extra
+# Load migrations
 require "./db/migrations/**"
+
+LuckyTask::Runner.run
