@@ -8,6 +8,7 @@
 /bin/lucky.watch
 /bin/lucky.watch.cr
 /.shards/
+/tmp
 *.dwarf
 
 # Libraries don't need dependency lock
