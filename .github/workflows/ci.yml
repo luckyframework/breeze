@@ -10,25 +10,21 @@ jobs:
   check_format:
     strategy:
       fail-fast: false
-      matrix:
-        crystal_version:
-          - latest
     runs-on: ubuntu-latest
+    continue-on-error: false
     steps:
       - uses: actions/checkout@v4
       - name: Install Crystal
         uses: crystal-lang/install-crystal@v1
         with:
-          crystal: ${{ matrix.crystal_version }}
+          crystal: latest
       - name: Install shards
         run: shards install
       - name: Format
         run: crystal tool format --check
-      - name: Crystal Ameba Linter
-        id: crystal-ameba
-        uses: crystal-ameba/github-action@v0.8.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lint
+        run: ./bin/ameba
+
   specs:
     strategy:
       fail-fast: false
