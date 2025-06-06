@@ -1,5 +1,6 @@
+require "lucky_task"
 require "colorize"
-require "./generators/*"
+require "./install/generators/*"
 
 class Breeze::Install < LuckyTask::Task
   summary "Installs the required files for running Breeze"
@@ -9,7 +10,7 @@ class Breeze::Install < LuckyTask::Task
 
     Breeze::ConfigGenerator.new.generate
   rescue e : Exception
-    STDOUT.puts <<-MESSAGE.colorize(:red)
+    output.puts <<-MESSAGE.colorize(:red)
     Breeze installation failed:
 
     #{e.message}
@@ -17,11 +18,11 @@ class Breeze::Install < LuckyTask::Task
   end
 
   private def print_installation_message
-    STDOUT.puts ""
-    STDOUT.puts installing_background
-    STDOUT.puts installing_message.colorize.on_cyan.black
-    STDOUT.puts installing_background
-    STDOUT.puts ""
+    output.puts ""
+    output.puts installing_background
+    output.puts installing_message.colorize.on_cyan.black
+    output.puts installing_background
+    output.puts ""
   end
 
   private def installing_background

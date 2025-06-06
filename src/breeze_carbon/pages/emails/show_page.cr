@@ -10,8 +10,8 @@ class BreezeCarbon::Emails::ShowPage < Breeze::BreezeLayout
   def content
     mount Breeze::Panel do
       mount Breeze::DescriptionList,
-        heading_title: ->{ text "Email Previews" },
-        list: ->{
+        heading_title: -> { text "Email Previews" },
+        list: -> {
           mount Breeze::DescriptionListRow, "Subject", email.subject
           mount Breeze::DescriptionListRow, "From", email.from.address
           mount Breeze::DescriptionListRow, "To", email.to.join(", ", &.address)
